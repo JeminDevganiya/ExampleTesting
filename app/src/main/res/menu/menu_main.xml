@@ -1,0 +1,16 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.app.exampletesting.ui.main.MainActivity">
+    <item
+        android:id="@+id/action_task"
+        android:orderInCategory="100"
+        android:title="@string/task_lists"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/actions_statistics"
+        android:orderInCategory="100"
+        android:title="@string/statistics"
+        app:showAsAction="never" />
+
+</menu>
