@@ -24,6 +24,7 @@ class AddTask : AppCompatActivity() {
     private lateinit var actionBarDrawerToggle: ActionBarDrawerToggle
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var toolbar: androidx.appcompat.widget.Toolbar
+    private lateinit var fragment: Fragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,6 +35,11 @@ class AddTask : AppCompatActivity() {
         drawerLayout = binding.drawer
         toolbar = binding.toolbar.findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
+
+        fragment = AllFragment()
+        val ft: FragmentTransaction = supportFragmentManager.beginTransaction()
+        ft.replace(R.id.mainFram, fragment)
+        ft.commit()
 
         actionBarDrawerToggle =
             ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.open,R.string.close)
@@ -61,13 +67,10 @@ class AddTask : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         val id = item.itemId
-        val fragment : Fragment
+
         when (id) {
             R.id.action_all -> {
-                fragment = AllFragment()
-                val ft: FragmentTransaction = supportFragmentManager.beginTransaction()
-                ft.replace(R.id.mainFram, fragment)
-                ft.commit()
+
             }
             R.id.action_active -> {
                 fragment = ActiveFragment()
