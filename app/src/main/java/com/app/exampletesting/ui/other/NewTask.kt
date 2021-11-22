@@ -1,9 +1,11 @@
 package com.app.exampletesting.ui.other
 
 import android.content.Intent
+import android.opengl.Visibility
 import android.os.Bundle
 import android.provider.ContactsContract
 import android.view.MenuItem
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.room.Database
@@ -47,14 +49,12 @@ class NewTask : AppCompatActivity() {
                     Toast.makeText(this, "Enter task", Toast.LENGTH_LONG).show()
                 }
                 else -> {
-                    val data = TaskData(0,title)
-                    userDao.insert(data)
-                    val intent = Intent(this, AddTask::class.java)
-                    startActivity(intent)
+                    val task = TaskData(0,title)
+                    userDao.insert(task)
+                    binding.progressBar.visibility
                 }
             }
         }
-
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

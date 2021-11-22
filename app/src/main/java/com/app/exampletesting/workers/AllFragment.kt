@@ -5,19 +5,38 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import com.app.exampletesting.R
+import com.app.exampletesting.adapters.AllTaskAdapter
+import com.app.exampletesting.databinding.FragmentAllBinding
+import com.app.exampletesting.ui.other.TaskViewModel
 
 class AllFragment : Fragment() {
+    private lateinit var binding: FragmentAllBinding
+    private lateinit var allTaskAdapter: AllTaskAdapter
+    private val viewModel: TaskViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_all,container,false)
+        binding = FragmentAllBinding.inflate(layoutInflater)
+        return (binding.root)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        allTaskAdapter = AllTaskAdapter()
+        binding.allRC.adapter = allTaskAdapter
+
+        viewModel.getTaskData()
+
+        viewModel.allUser.observe(viewLifecycleOwner,{
+            allTaskAdapter.getTask(
+                newTask = it
+            )
+        })
     }
 }
