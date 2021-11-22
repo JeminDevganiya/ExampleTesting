@@ -51,9 +51,10 @@ class NewTask : AppCompatActivity() {
                 else -> {
                     val task = TaskData(0,title)
                     userDao.insert(task)
-                    binding.progressBar.visibility
                 }
             }
+            val intent = Intent(this,AddTask::class.java)
+            startActivity(intent)
         }
     }
 

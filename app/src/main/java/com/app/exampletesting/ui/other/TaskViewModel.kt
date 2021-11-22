@@ -13,9 +13,14 @@ class TaskViewModel @Inject constructor(
 
     val allUser: LiveData<List<TaskData>> = dataStoreRepository.getAll().asLiveData()
 
+    private val _loading = MutableLiveData<Boolean>()
+    val dataLoading: LiveData<Boolean> = _loading
+
     fun getTaskData(){
+        _loading.value = true
         viewModelScope.launch {
             dataStoreRepository.getAll()
+            _loading.value = false
         }
     }
 }

@@ -38,5 +38,9 @@ class AllFragment : Fragment() {
                 newTask = it
             )
         })
+
+        viewModel.dataLoading.observe(viewLifecycleOwner,{
+            binding.progressBar.visibility
+        })
     }
 }
