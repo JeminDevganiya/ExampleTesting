@@ -1,23 +1,28 @@
 package com.app.exampletesting.ui.other
 
-import android.content.Intent
-import android.opengl.Visibility
 import android.os.Bundle
-import android.provider.ContactsContract
 import android.view.MenuItem
-import android.view.View
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.room.Database
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewModelScope
 import androidx.room.Room
-import androidx.room.RoomDatabase
 import com.app.exampletesting.databinding.NewTaskBinding
 import com.app.exampletesting.data.local.AppDatabase
 import com.app.exampletesting.data.local.TaskData
+import dagger.hilt.android.AndroidEntryPoint
+
 
 class NewTask : AppCompatActivity() {
 
     private lateinit var binding: NewTaskBinding
+    private lateinit var viewModelFactory: ViewModelProvider.Factory
+    private val viewModel: NewTaskViewModel by viewModels{
+        viewModelFactory
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,14 +34,6 @@ class NewTask : AppCompatActivity() {
             setDisplayHomeAsUpEnabled(true)
             title = "New Task"
         }
-
-        val db = Room.databaseBuilder(
-            applicationContext,
-            AppDatabase::class.java,
-            "database")
-            .allowMainThreadQueries()
-            .build()
-        val userDao = db.userDao()
 
         binding.checkButton.setOnClickListener {
             val title = binding.enterTitleText.text.toString()
@@ -50,12 +47,13 @@ class NewTask : AppCompatActivity() {
                 }
                 else -> {
                     val task = TaskData(0,title)
-                    userDao.insert(task)
+                    viewModel.insertTaskData(task)
                 }
             }
-            val intent = Intent(this,AddTask::class.java)
-            startActivity(intent)
         }
+        viewModel.insertFinish.observe(this,{
+            finish()
+        })
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

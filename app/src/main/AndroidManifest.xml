@@ -20,7 +20,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.other.NewTask" android:theme="@style/Theme.ExampleTesting.NoActionBar"/>
-        <activity android:name=".ui.other.AddTask" android:theme="@style/Theme.ExampleTesting.NoActionBar"/>
     </application>
 
 </manifest>

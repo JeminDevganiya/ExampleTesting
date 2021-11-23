@@ -6,15 +6,18 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import com.app.exampletesting.R
+import androidx.lifecycle.ViewModelProvider
 import com.app.exampletesting.adapters.AllTaskAdapter
 import com.app.exampletesting.databinding.FragmentAllBinding
-import com.app.exampletesting.ui.other.TaskViewModel
+import com.app.exampletesting.ui.main.TaskViewModel
 
 class AllFragment : Fragment() {
     private lateinit var binding: FragmentAllBinding
     private lateinit var allTaskAdapter: AllTaskAdapter
-    private val viewModel: TaskViewModel by viewModels()
+    private lateinit var viewModelFactory: ViewModelProvider.Factory
+    private val viewModel: TaskViewModel by viewModels{
+        viewModelFactory
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -34,13 +37,7 @@ class AllFragment : Fragment() {
         viewModel.getTaskData()
 
         viewModel.allUser.observe(viewLifecycleOwner,{
-            allTaskAdapter.getTask(
-                newTask = it
-            )
-        })
-
-        viewModel.dataLoading.observe(viewLifecycleOwner,{
-            binding.progressBar.visibility
+            allTaskAdapter.getTask(it)
         })
     }
 }

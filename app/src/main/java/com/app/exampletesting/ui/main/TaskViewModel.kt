@@ -1,10 +1,12 @@
-package com.app.exampletesting.ui.other
+package com.app.exampletesting.ui.main
 
 import androidx.lifecycle.*
 import com.app.exampletesting.DataStoreRepository
 import com.app.exampletesting.data.local.TaskData
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+
 
 class TaskViewModel @Inject constructor(
     private val dataStoreRepository: DataStoreRepository
@@ -13,14 +15,9 @@ class TaskViewModel @Inject constructor(
 
     val allUser: LiveData<List<TaskData>> = dataStoreRepository.getAll().asLiveData()
 
-    private val _loading = MutableLiveData<Boolean>()
-    val dataLoading: LiveData<Boolean> = _loading
-
     fun getTaskData(){
-        _loading.value = true
         viewModelScope.launch {
             dataStoreRepository.getAll()
-            _loading.value = false
         }
     }
 }

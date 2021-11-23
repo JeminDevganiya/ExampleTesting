@@ -10,11 +10,16 @@ import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentTransaction
 import com.app.exampletesting.R
 import com.app.exampletesting.databinding.ActivityMainBinding
 import com.app.exampletesting.ui.other.NewTask
+import com.app.exampletesting.workers.ActiveFragment
+import com.app.exampletesting.workers.AllFragment
+import com.app.exampletesting.workers.CompletedFragment
 import com.google.android.material.navigation.NavigationView
-
+import dagger.hilt.android.AndroidEntryPoint
 
 class MainActivity : AppCompatActivity() {
 
@@ -23,6 +28,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var actionBarDrawerToggle: ActionBarDrawerToggle
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var toolbar: androidx.appcompat.widget.Toolbar
+    private lateinit var fragment: Fragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,6 +61,7 @@ class MainActivity : AppCompatActivity() {
             }
             true
         }
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -63,14 +70,28 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            R.id.action_all -> true
+        val id = item.itemId
 
-            R.id.action_active -> true
-
-            R.id.action_completed -> true
-
-            else -> super.onOptionsItemSelected(item)
+        when (id) {
+            R.id.action_all -> {
+                fragment = AllFragment()
+                val ft: FragmentTransaction = supportFragmentManager.beginTransaction()
+                ft.replace(R.id.mainFram, fragment)
+                ft.commit()
+            }
+            R.id.action_active -> {
+                fragment = ActiveFragment()
+                val ft: FragmentTransaction = supportFragmentManager.beginTransaction()
+                ft.replace(R.id.mainFram, fragment)
+                ft.commit()
+            }
+            R.id.action_completed -> {
+                fragment = CompletedFragment()
+                val ft: FragmentTransaction = supportFragmentManager.beginTransaction()
+                ft.replace(R.id.mainFram, fragment)
+                ft.commit()
+            }
         }
+        return true
     }
 }
