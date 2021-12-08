@@ -8,7 +8,9 @@ import androidx.fragment.app.Fragment
 import com.app.exampletesting.R
 import com.app.exampletesting.adapters.AllTaskAdapter
 import com.app.exampletesting.databinding.FragmentCompletedBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class CompletedFragment : Fragment() {
     private lateinit var binding: FragmentCompletedBinding
     private lateinit var allTaskAdapter: AllTaskAdapter

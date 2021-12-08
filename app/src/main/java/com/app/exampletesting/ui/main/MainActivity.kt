@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import com.app.exampletesting.R
 import com.app.exampletesting.databinding.ActivityMainBinding
@@ -21,6 +22,7 @@ import com.app.exampletesting.workers.CompletedFragment
 import com.google.android.material.navigation.NavigationView
 import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
@@ -42,6 +44,11 @@ class MainActivity : AppCompatActivity() {
         drawerLayout = binding.drawer
         toolbar = binding.toolbar.findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
+
+        val allFragment = AllFragment()
+        val fragmentManager: FragmentManager = supportFragmentManager
+        val fragmentTransaction: FragmentTransaction = fragmentManager.beginTransaction()
+        fragmentTransaction.replace(R.id.mainFram,allFragment).commit()
 
         actionBarDrawerToggle =
             ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.open,R.string.close)

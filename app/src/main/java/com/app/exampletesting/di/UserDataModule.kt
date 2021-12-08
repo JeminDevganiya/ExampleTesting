@@ -1,4 +1,4 @@
-package com.app.retrofitexample.di
+package com.app.exampletesting.di
 
 import com.app.exampletesting.DataStoreRepository
 import com.app.exampletesting.DataStoreRepositoryImpl

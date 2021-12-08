@@ -8,7 +8,9 @@ import androidx.fragment.app.Fragment
 import com.app.exampletesting.R
 import com.app.exampletesting.adapters.AllTaskAdapter
 import com.app.exampletesting.databinding.FragmentActiveBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class ActiveFragment : Fragment() {
 
     private lateinit var binding: FragmentActiveBinding

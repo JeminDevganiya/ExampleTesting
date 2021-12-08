@@ -11,4 +11,5 @@ import kotlinx.android.parcel.Parcelize
 data class TaskData(
     @PrimaryKey val uid: Int,
     @ColumnInfo(name = "task_title") val taskTitle: String,
+    @ColumnInfo(name = "second_title") val taskEnter: String,
 ) : Parcelable

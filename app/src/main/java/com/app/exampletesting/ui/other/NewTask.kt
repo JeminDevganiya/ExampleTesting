@@ -5,29 +5,25 @@ import android.view.MenuItem
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.viewModelScope
-import androidx.room.Room
-import com.app.exampletesting.databinding.NewTaskBinding
-import com.app.exampletesting.data.local.AppDatabase
 import com.app.exampletesting.data.local.TaskData
+import com.app.exampletesting.databinding.NewTaskBinding
 import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class NewTask : AppCompatActivity() {
 
     private lateinit var binding: NewTaskBinding
-    private lateinit var viewModelFactory: ViewModelProvider.Factory
-    private val viewModel: NewTaskViewModel by viewModels{
-        viewModelFactory
-    }
+
+    //    @Inject
+//    lateinit var viewModelFactory: ViewModelProvider.Factory
+    private val viewModel: NewTaskViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = NewTaskBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+
 
         setSupportActionBar(binding.toolbar)
         supportActionBar?.apply {
@@ -37,21 +33,22 @@ class NewTask : AppCompatActivity() {
 
         binding.checkButton.setOnClickListener {
             val title = binding.enterTitleText.text.toString()
-            val task = binding.enterTaskText.text.toString()
+            val secondTitle = binding.enterTaskText.text.toString()
             when {
                 title.isEmpty() -> {
                     Toast.makeText(this, "Enter title", Toast.LENGTH_LONG).show()
                 }
-                task.isEmpty() -> {
+                secondTitle.isEmpty() -> {
                     Toast.makeText(this, "Enter task", Toast.LENGTH_LONG).show()
                 }
                 else -> {
-                    val task = TaskData(0,title)
+                    val task = TaskData(0,title,secondTitle)
                     viewModel.insertTaskData(task)
                 }
             }
         }
-        viewModel.insertFinish.observe(this,{
+
+        viewModel.insertFinish.observe(this, {
             finish()
         })
     }

@@ -10,14 +10,16 @@ import androidx.lifecycle.ViewModelProvider
 import com.app.exampletesting.adapters.AllTaskAdapter
 import com.app.exampletesting.databinding.FragmentAllBinding
 import com.app.exampletesting.ui.main.TaskViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class AllFragment : Fragment() {
     private lateinit var binding: FragmentAllBinding
     private lateinit var allTaskAdapter: AllTaskAdapter
-    private lateinit var viewModelFactory: ViewModelProvider.Factory
-    private val viewModel: TaskViewModel by viewModels{
-        viewModelFactory
-    }
+
+    //    @Inject
+//    lateinit var viewModelFactory: ViewModelProvider.Factory
+    private val viewModel: TaskViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -33,10 +35,9 @@ class AllFragment : Fragment() {
 
         allTaskAdapter = AllTaskAdapter()
         binding.allRC.adapter = allTaskAdapter
-
         viewModel.getTaskData()
 
-        viewModel.allUser.observe(viewLifecycleOwner,{
+        viewModel.allUser.observe(viewLifecycleOwner, {
             allTaskAdapter.getTask(it)
         })
     }

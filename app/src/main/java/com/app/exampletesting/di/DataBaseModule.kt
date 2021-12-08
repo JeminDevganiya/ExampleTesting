@@ -1,10 +1,9 @@
-package com.app.retrofitexample.di
+package com.app.exampletesting.di
 
 import android.content.Context
 import androidx.room.Room
 import com.app.exampletesting.data.local.AppDatabase
 import com.app.exampletesting.data.local.UserDao
-
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
