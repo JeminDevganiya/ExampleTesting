@@ -13,9 +13,6 @@ import dagger.hilt.android.AndroidEntryPoint
 class NewTask : AppCompatActivity() {
 
     private lateinit var binding: NewTaskBinding
-
-    //    @Inject
-//    lateinit var viewModelFactory: ViewModelProvider.Factory
     private val viewModel: NewTaskViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,16 +30,16 @@ class NewTask : AppCompatActivity() {
 
         binding.checkButton.setOnClickListener {
             val title = binding.enterTitleText.text.toString()
-            val secondTitle = binding.enterTaskText.text.toString()
+            val description = binding.enterTaskText.text.toString()
             when {
                 title.isEmpty() -> {
                     Toast.makeText(this, "Enter title", Toast.LENGTH_LONG).show()
                 }
-                secondTitle.isEmpty() -> {
+                description.isEmpty() -> {
                     Toast.makeText(this, "Enter task", Toast.LENGTH_LONG).show()
                 }
                 else -> {
-                    val task = TaskData(0,title,secondTitle)
+                    val task = TaskData(0,title,description, false)
                     viewModel.insertTaskData(task)
                 }
             }

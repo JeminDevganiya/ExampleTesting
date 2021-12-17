@@ -16,9 +16,6 @@ import dagger.hilt.android.AndroidEntryPoint
 class AllFragment : Fragment() {
     private lateinit var binding: FragmentAllBinding
     private lateinit var allTaskAdapter: AllTaskAdapter
-
-    //    @Inject
-//    lateinit var viewModelFactory: ViewModelProvider.Factory
     private val viewModel: TaskViewModel by viewModels()
 
     override fun onCreateView(
@@ -35,10 +32,13 @@ class AllFragment : Fragment() {
 
         allTaskAdapter = AllTaskAdapter()
         binding.allRC.adapter = allTaskAdapter
-        viewModel.getTaskData()
 
         viewModel.allUser.observe(viewLifecycleOwner, {
-            allTaskAdapter.getTask(it)
+            allTaskAdapter.addTask(it)
+            if (it.isNotEmpty()){
+                binding.leafImageView.visibility = View.GONE
+                binding.textView.visibility = View.GONE
+            }
         })
     }
 }
