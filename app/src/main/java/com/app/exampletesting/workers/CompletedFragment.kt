@@ -5,15 +5,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.app.exampletesting.R
+import androidx.fragment.app.viewModels
 import com.app.exampletesting.adapters.AllTaskAdapter
 import com.app.exampletesting.databinding.FragmentCompletedBinding
+import com.app.exampletesting.ui.main.TaskViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class CompletedFragment : Fragment() {
     private lateinit var binding: FragmentCompletedBinding
     private lateinit var allTaskAdapter: AllTaskAdapter
+    private val viewModel: TaskViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -28,5 +30,9 @@ class CompletedFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         allTaskAdapter = AllTaskAdapter()
         binding.completeRC.adapter = allTaskAdapter
+
+        viewModel.allUser.observe(viewLifecycleOwner, {
+            allTaskAdapter.addTask(it)
+        })
     }
 }

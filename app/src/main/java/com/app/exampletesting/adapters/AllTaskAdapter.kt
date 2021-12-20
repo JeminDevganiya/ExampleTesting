@@ -17,6 +17,7 @@ class AllTaskAdapter : RecyclerView.Adapter<AllTaskAdapter.MyViewHolder>() {
 
     data class MyViewHolder(val binding: RowTextBinding) : RecyclerView.ViewHolder(binding.root)
 
+    var click: (TaskData) -> Unit = {}
     private val data: MutableList<TaskData> = mutableListOf()
 
     fun addTask(newTask: List<TaskData>) {
@@ -34,6 +35,9 @@ class AllTaskAdapter : RecyclerView.Adapter<AllTaskAdapter.MyViewHolder>() {
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         holder.binding.titleText.text = data[position].taskTitle
+        holder.binding.allTaskCheckBox.setOnClickListener {
+            click(data[position])
+        }
 
         if (holder.binding.allTaskCheckBox.isChecked) {
             holder.binding.titleText.paintFlags = holder.binding.titleText.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG

@@ -6,6 +6,7 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
+import javax.inject.Singleton
 
 interface DataStoreRepository {
     fun getAll() : kotlinx.coroutines.flow.Flow<List<TaskData>>
@@ -15,6 +16,7 @@ interface DataStoreRepository {
     suspend fun activateTask(taskId: String)
     suspend fun activateTask(taskData: TaskData)
 }
+
 class DataStoreRepositoryImpl @Inject constructor(
     private val userDao: UserDao,
     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO

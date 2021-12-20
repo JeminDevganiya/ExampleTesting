@@ -54,27 +54,6 @@
             android:focusable="true"
             android:contentDescription="@string/todo" />
 
-        <ImageView
-            android:id="@+id/leafImageView"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/leaf" />
-
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="You have no tasks!"
-            android:textColor="@color/teal_200"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/leafImageView" />
 
         <FrameLayout
             android:id="@+id/mainFram"

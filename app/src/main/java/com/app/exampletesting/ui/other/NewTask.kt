@@ -2,11 +2,13 @@ package com.app.exampletesting.ui.other
 
 import android.os.Bundle
 import android.view.MenuItem
+import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.app.exampletesting.data.local.TaskData
 import com.app.exampletesting.databinding.NewTaskBinding
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -20,14 +22,11 @@ class NewTask : AppCompatActivity() {
         binding = NewTaskBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-
-
         setSupportActionBar(binding.toolbar)
         supportActionBar?.apply {
             setDisplayHomeAsUpEnabled(true)
             title = "New Task"
         }
-
         binding.checkButton.setOnClickListener {
             val title = binding.enterTitleText.text.toString()
             val description = binding.enterTaskText.text.toString()
@@ -41,6 +40,8 @@ class NewTask : AppCompatActivity() {
                 else -> {
                     val task = TaskData(0,title,description, false)
                     viewModel.insertTaskData(task)
+                    Snackbar.make(binding.view,"Task saved",Snackbar.LENGTH_LONG).show()
+
                 }
             }
         }
@@ -52,7 +53,6 @@ class NewTask : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
-
             android.R.id.home -> {
                 finish()
 

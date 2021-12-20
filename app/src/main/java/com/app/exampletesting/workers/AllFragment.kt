@@ -6,11 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.Observer
+import com.app.exampletesting.R
 import com.app.exampletesting.adapters.AllTaskAdapter
 import com.app.exampletesting.databinding.FragmentAllBinding
 import com.app.exampletesting.ui.main.TaskViewModel
 import dagger.hilt.android.AndroidEntryPoint
+
 
 @AndroidEntryPoint
 class AllFragment : Fragment() {
@@ -40,5 +42,8 @@ class AllFragment : Fragment() {
                 binding.textView.visibility = View.GONE
             }
         })
+        allTaskAdapter.click = {
+            viewModel.setCompleted(it)
+        }
     }
 }

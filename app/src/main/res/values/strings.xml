@@ -17,4 +17,7 @@
     <string name="open">Open</string>
     <string name="close">Close</string>
     <string name="todo">TODO</string>
+    <string name="task_marked_complete">Task marked complete</string>
+    <string name="task_marked_active">Task marked active</string>
+
 </resources>
