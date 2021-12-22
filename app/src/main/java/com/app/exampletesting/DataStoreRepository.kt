@@ -4,6 +4,7 @@ import com.app.exampletesting.data.local.TaskData
 import com.app.exampletesting.data.local.UserDao
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -15,6 +16,7 @@ interface DataStoreRepository {
     suspend fun completeTask(taskId: String)
     suspend fun activateTask(taskId: String)
     suspend fun activateTask(taskData: TaskData)
+    suspend fun getCompleteTask(): List<TaskData>
 }
 
 class DataStoreRepositoryImpl @Inject constructor(
@@ -38,6 +40,7 @@ class DataStoreRepositoryImpl @Inject constructor(
     override suspend fun activateTask(taskId: String) {
         userDao.updateCompleted(taskId, false)
     }
+    override suspend fun getCompleteTask():List<TaskData> = userDao.getCompleteTask()
 
 }
 

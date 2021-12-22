@@ -15,7 +15,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class CompletedFragment : Fragment() {
     private lateinit var binding: FragmentCompletedBinding
     private lateinit var allTaskAdapter: AllTaskAdapter
-    private val viewModel: TaskViewModel by viewModels()
+    private val viewModel : CompletedTaskViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -31,8 +31,9 @@ class CompletedFragment : Fragment() {
         allTaskAdapter = AllTaskAdapter()
         binding.completeRC.adapter = allTaskAdapter
 
-        viewModel.allUser.observe(viewLifecycleOwner, {
+        viewModel.completeTask.observe(viewLifecycleOwner,{
             allTaskAdapter.addTask(it)
         })
+        viewModel.getCompleteTask()
     }
 }

@@ -11,6 +11,7 @@ import com.app.exampletesting.R
 import com.app.exampletesting.adapters.AllTaskAdapter
 import com.app.exampletesting.databinding.FragmentAllBinding
 import com.app.exampletesting.ui.main.TaskViewModel
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -45,5 +46,8 @@ class AllFragment : Fragment() {
         allTaskAdapter.click = {
             viewModel.setCompleted(it)
         }
+        viewModel.snackBarText.observe(viewLifecycleOwner,{
+                Snackbar.make(binding.view2, it, Snackbar.LENGTH_SHORT).show()
+        })
     }
 }

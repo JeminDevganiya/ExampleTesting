@@ -38,10 +38,9 @@ class NewTask : AppCompatActivity() {
                     Toast.makeText(this, "Enter task", Toast.LENGTH_LONG).show()
                 }
                 else -> {
-                    val task = TaskData(0,title,description, false)
+                    val task = TaskData(0, title, description, false)
                     viewModel.insertTaskData(task)
-                    Snackbar.make(binding.view,"Task saved",Snackbar.LENGTH_LONG).show()
-
+                    Snackbar.make(binding.view, "Task saved", Snackbar.LENGTH_LONG).show()
                 }
             }
         }

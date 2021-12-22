@@ -13,6 +13,10 @@ interface UserDao {
 
     @Query("UPDATE TaskData SET completed = :completed WHERE id = :taskId")
     suspend fun updateCompleted(taskId: String, completed: Boolean)
+
+    @Query("Select * From taskData Where completed = :completed")
+    fun getCompleteTask(completed: Boolean = true) : List<TaskData>
+
 }
 @Database(entities = [TaskData::class], version = 1)
 abstract class AppDatabase : RoomDatabase() {

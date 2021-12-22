@@ -24,12 +24,11 @@ class TaskViewModel @Inject constructor(
 
     fun setCompleted(taskData: TaskData) = viewModelScope.launch {
         if (taskData.taskComplete) {
-            dataStoreRepository.completeTask(taskData)
-            showSnackBarMessage(R.string.task_marked_complete)
-        } else {
             dataStoreRepository.activateTask(taskData)
             showSnackBarMessage(R.string.task_marked_active)
-
+        } else {
+            dataStoreRepository.completeTask(taskData)
+            showSnackBarMessage(R.string.task_marked_complete)
         }
     }
 }

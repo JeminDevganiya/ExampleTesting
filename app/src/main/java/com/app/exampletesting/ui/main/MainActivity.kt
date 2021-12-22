@@ -6,6 +6,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
@@ -16,11 +17,11 @@ import androidx.fragment.app.FragmentTransaction
 import com.app.exampletesting.R
 import com.app.exampletesting.databinding.ActivityMainBinding
 import com.app.exampletesting.ui.other.NewTask
-import com.app.exampletesting.workers.ActiveFragment
-import com.app.exampletesting.workers.AllFragment
-import com.app.exampletesting.workers.CompletedFragment
+import com.app.exampletesting.workers.*
 import com.google.android.material.navigation.NavigationView
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.new_task.*
+import kotlinx.android.synthetic.main.row_text.*
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -31,6 +32,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var toolbar: androidx.appcompat.widget.Toolbar
     private lateinit var fragment: Fragment
+    private val viewModel : CompletedTaskViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

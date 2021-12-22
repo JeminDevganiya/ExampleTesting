@@ -21,6 +21,7 @@ class AllTaskAdapter : RecyclerView.Adapter<AllTaskAdapter.MyViewHolder>() {
     private val data: MutableList<TaskData> = mutableListOf()
 
     fun addTask(newTask: List<TaskData>) {
+        data.clear()
         data.addAll(newTask)
         notifyDataSetChanged()
     }
@@ -37,11 +38,15 @@ class AllTaskAdapter : RecyclerView.Adapter<AllTaskAdapter.MyViewHolder>() {
         holder.binding.titleText.text = data[position].taskTitle
         holder.binding.allTaskCheckBox.setOnClickListener {
             click(data[position])
+            if (holder.binding.allTaskCheckBox.isChecked) {
+                holder.binding.titleText.paintFlags = holder.binding.titleText.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
+            }else{
+                holder.binding.titleText.paintFlags = Paint.ANTI_ALIAS_FLAG
+            }
+
         }
 
-        if (holder.binding.allTaskCheckBox.isChecked) {
-            holder.binding.titleText.paintFlags = holder.binding.titleText.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
-        }
+
     }
 
     override fun getItemCount(): Int = data.size
