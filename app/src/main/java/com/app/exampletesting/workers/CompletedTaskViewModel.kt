@@ -20,7 +20,7 @@ class CompletedTaskViewModel @Inject constructor(
 
     fun getCompleteTask() {
         viewModelScope.launch {
-            dataStoreRepository.getCompleteTask()
+            _completeTask.value = dataStoreRepository.getCompleteTask()
         }
     }
 }

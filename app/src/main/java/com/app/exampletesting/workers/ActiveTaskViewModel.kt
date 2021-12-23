@@ -20,7 +20,7 @@ class ActiveTaskViewModel @Inject constructor(
 
     fun getActiveTask() {
         viewModelScope.launch {
-
+            _activeTask.value = dataStoreRepository.getActiveTask()
         }
     }
 }

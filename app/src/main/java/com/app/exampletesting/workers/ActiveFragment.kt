@@ -32,6 +32,11 @@ class ActiveFragment : Fragment() {
         binding.activeRC.adapter = allTaskAdapter
 
         viewModel.activeTask.observe(viewLifecycleOwner,{
+            allTaskAdapter.addTask(it)
+            if (it.isNotEmpty()) {
+                binding.noActiveTaskText.visibility = View.GONE
+            }
         })
+        viewModel.getActiveTask()
     }
 }

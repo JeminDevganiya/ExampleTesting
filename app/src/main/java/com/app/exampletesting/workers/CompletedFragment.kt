@@ -33,6 +33,9 @@ class CompletedFragment : Fragment() {
 
         viewModel.completeTask.observe(viewLifecycleOwner,{
             allTaskAdapter.addTask(it)
+            if (it.isNotEmpty()){
+                binding.noTaskText.visibility = View.GONE
+            }
         })
         viewModel.getCompleteTask()
     }

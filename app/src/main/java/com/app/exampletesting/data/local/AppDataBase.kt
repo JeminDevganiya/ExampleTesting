@@ -17,6 +17,9 @@ interface UserDao {
     @Query("Select * From taskData Where completed = :completed")
     fun getCompleteTask(completed: Boolean = true) : List<TaskData>
 
+    @Query("Select * From taskData Where completed = :completed")
+    fun getActiveTask(completed: Boolean = false) : List<TaskData>
+
 }
 @Database(entities = [TaskData::class], version = 1)
 abstract class AppDatabase : RoomDatabase() {

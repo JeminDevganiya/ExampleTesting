@@ -17,6 +17,7 @@ interface DataStoreRepository {
     suspend fun activateTask(taskId: String)
     suspend fun activateTask(taskData: TaskData)
     suspend fun getCompleteTask(): List<TaskData>
+    suspend fun getActiveTask(): List<TaskData>
 }
 
 class DataStoreRepositoryImpl @Inject constructor(
@@ -40,7 +41,9 @@ class DataStoreRepositoryImpl @Inject constructor(
     override suspend fun activateTask(taskId: String) {
         userDao.updateCompleted(taskId, false)
     }
-    override suspend fun getCompleteTask():List<TaskData> = userDao.getCompleteTask()
+    override suspend fun getCompleteTask():List<TaskData> = userDao.getCompleteTask(true)
+
+    override suspend fun getActiveTask(): List<TaskData>  = userDao.getActiveTask(false)
 
 }
 
