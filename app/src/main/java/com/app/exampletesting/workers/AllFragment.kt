@@ -43,11 +43,11 @@ class AllFragment : Fragment() {
                 binding.textView.visibility = View.GONE
             }
         })
-        allTaskAdapter.click = {
-            viewModel.setCompleted(it)
-        }
         viewModel.snackBarText.observe(viewLifecycleOwner,{
                 Snackbar.make(binding.view2, it, Snackbar.LENGTH_SHORT).show()
         })
+        allTaskAdapter.click = {
+            viewModel.setCompleted(it)
+        }
     }
 }

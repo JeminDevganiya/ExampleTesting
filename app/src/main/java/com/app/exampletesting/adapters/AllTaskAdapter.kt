@@ -38,15 +38,14 @@ class AllTaskAdapter : RecyclerView.Adapter<AllTaskAdapter.MyViewHolder>() {
         holder.binding.titleText.text = data[position].taskTitle
         holder.binding.allTaskCheckBox.setOnClickListener {
             click(data[position])
-            if (holder.binding.allTaskCheckBox.isChecked) {
-                holder.binding.titleText.paintFlags = holder.binding.titleText.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
-            }else{
-                holder.binding.titleText.paintFlags = Paint.ANTI_ALIAS_FLAG
-            }
-
         }
-
-
+        if (data[position].taskComplete) {
+            holder.binding.titleText.paintFlags = holder.binding.titleText.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
+            holder.binding.allTaskCheckBox.isChecked = true
+        }else{
+            holder.binding.titleText.paintFlags = Paint.ANTI_ALIAS_FLAG
+            holder.binding.allTaskCheckBox.isChecked = false
+        }
     }
 
     override fun getItemCount(): Int = data.size
